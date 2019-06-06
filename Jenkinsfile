@@ -11,11 +11,14 @@ pipeline {
             }
         }
         
+        /*
+        // This step is required only when we copy the script in Jenkins
         stage ('Clone sources') {
             steps {
 	            git url: 'https://github.com/bootkemp/Microservices.git'
             }
     	}
+    	*/
 
         stage ('Build') {
             steps {
