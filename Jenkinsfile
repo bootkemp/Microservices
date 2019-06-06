@@ -6,17 +6,28 @@ pipeline {
     stages {
         stage ('Initialize') {
             steps {
-                echo 'To initialize.'
+                
+                bat 'echo %PATH%'
             }
         }
         
-        stage('Clone sources') {
-	        git url: 'https://github.com/bootkemp/Microservices.git'
+        stage ('Clone sources') {
+            steps {
+	            git url: 'https://github.com/bootkemp/Microservices.git'
+            }
     	}
 
         stage ('Build') {
             steps {
-                echo 'This is a minimal pipeline.'
+                echo 'Building pipeline'
+                bat 'mvn -f spring-server-car-showroom/pom.xml clean install'
+            }
+        }
+        
+        stage ('Containerize') {
+            steps {
+                echo 'Building pipeline'
+                bat 'docker build -t bootkemp/car-showroom .'
             }
         }
     }
